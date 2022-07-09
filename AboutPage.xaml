@@ -5,8 +5,47 @@
              Title="About">
     <StackLayout Orientation="Vertical"
                  Margin="20">
-        <Label Text="InsulinIPCalc v2.0 &#xA;Copyright (C) 2015-2022 &#xA;John George K. &#xA;xeonfusion@yahoo.com &#xA;&#xA;Yale Insulin protocol: &#xA;http://inpatient.aace.com &#xA;(C) Yale-New Haven Hospital"
-               FontSize="24"
+        <Label Text="InsulinIPCalc v2.0 &#xA;"
+               TextColor="Blue"
+               FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
+               FontAttributes="Bold"
+               VerticalOptions="Start"
+               HorizontalOptions="CenterAndExpand" />
+        <Label Text="Copyright (C) 2015-2022 &#xA;John George K."
+               FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+        <Label Text="encodenetapps@gmail.com&#xA;"
+               TextColor="Blue"
+               TextDecorations="Underline"
+               FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
+               FontAttributes="Bold"
+               VerticalOptions="Start"
+               HorizontalOptions="CenterAndExpand">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TapCommand}"
+                                      CommandParameter="mailto:encodenetapps@gmail.com" />
+            </Label.GestureRecognizers>
+        </Label>
+        <Label Text="Yale Insulin protocol:"
+               FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
+               FontAttributes="Bold"
+               VerticalOptions="Start"
+               HorizontalOptions="CenterAndExpand" />
+        <Label Text="http://pro.aace.com;"
+               TextColor="Blue"
+               TextDecorations="Underline"
+               FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
+               FontAttributes="Bold"
+               VerticalOptions="Start"
+               HorizontalOptions="CenterAndExpand">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TapCommand}"
+                                      CommandParameter="http://pro.aace.com" />
+            </Label.GestureRecognizers>
+        </Label>
+        <Label Text="(C) Yale-New Haven Hospital"
+               FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                FontAttributes="Bold"
                VerticalOptions="Start"
                HorizontalOptions="CenterAndExpand" />

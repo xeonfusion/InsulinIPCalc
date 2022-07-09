@@ -20,133 +20,129 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{OnPlatform 600, iOS=200, Android=200}" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="{OnIdiom Desktop=400, Phone=200, Tablet=400}" />
+                <ColumnDefinition Width="{OnIdiom Desktop=200, Phone=100, Tablet=200}" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Label Text="Target Blood Glucose"
-                   SemanticProperties.HeadingLevel="Level1"
-                   FontSize="{OnPlatform 32, iOS=18, Android=18}"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    HorizontalOptions="Start"
                    Grid.Row="0"
                    Grid.Column="0" />
             <Picker x:Name="pickerTargetBS"
                     Title="Select a target"
+                    FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                     SelectedIndex="0"
                     Grid.Row="0"
                     Grid.Column="1">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
-                        <x:String>120 - 160 mg/dL</x:String>
-                        <x:String>140 - 180 mg/dL</x:String>
+                        <x:String>120 - 160</x:String>
+                        <x:String>140 - 180</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
+            <Label Text="mg/dL"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
+                   HorizontalOptions="Start"
+                   Grid.Row="0"
+                   Grid.Column="2" />
             <Label Text="Current Blood Glucose"
-                   SemanticProperties.HeadingLevel="Level2"
-                   SemanticProperties.Description=""
-                   FontSize="{OnPlatform 32, iOS=18, Android=18}"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    HorizontalOptions="Start"
                    Grid.Row="1"
                    Grid.Column="0" />
             <Entry x:Name="etCurrentBS"
-                   Placeholder="Enter text"
+                   Placeholder="Enter value"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    Keyboard="Numeric"
                    TextChanged="OnCurrentBSChanged"
                    Grid.Row="1"
                    Grid.Column="1" />
             <Label Text="mg/dL"
-                   SemanticProperties.HeadingLevel="Level1"
-                   FontSize="{OnPlatform 32, iOS=18, Android=18}"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    HorizontalOptions="Start"
                    Grid.Row="1"
                    Grid.Column="2" />
             <Label Text="Previous Blood Glucose"
-                   SemanticProperties.HeadingLevel="Level2"
-                   SemanticProperties.Description=""
-                   FontSize="{OnPlatform 32, iOS=18, Android=18}"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    HorizontalOptions="Start"
                    Grid.Row="2"
                    Grid.Column="0" />
             <Entry x:Name="etPreviousBS"
-                   Placeholder="Enter text"
+                   Placeholder="Enter value"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    Keyboard="Numeric"
                    TextChanged="OnPreviousBSChanged"
                    Grid.Row="2"
                    Grid.Column="1" />
             <Label Text="mg/dL"
-                   SemanticProperties.HeadingLevel="Level1"
-                   FontSize="{OnPlatform 32, iOS=18, Android=18}"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    HorizontalOptions="Start"
                    Grid.Row="2"
                    Grid.Column="2" />
             <Label Text="Time between readings"
-                   SemanticProperties.HeadingLevel="Level1"
-                   FontSize="{OnPlatform 32, iOS=18, Android=18}"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    HorizontalOptions="Start"
                    Grid.Row="3"
                    Grid.Column="0" />
             <Entry x:Name="etTimeBS"
-                   Placeholder="Enter text"
+                   Placeholder="Enter value"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    Text="{Binding etTimeBS, Mode=TwoWay}"
                    Keyboard="Numeric"
                    TextChanged="OnTimeBSChanged"
                    Grid.Row="3"
                    Grid.Column="1" />
             <Label Text="hr"
-                   SemanticProperties.HeadingLevel="Level1"
-                   FontSize="{OnPlatform 32, iOS=18, Android=18}"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    HorizontalOptions="Start"
                    Grid.Row="3"
                    Grid.Column="2" />
             <Label Text="Current infusion rate"
-                   SemanticProperties.HeadingLevel="Level1"
-                   FontSize="{OnPlatform 32, iOS=18, Android=18}"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    HorizontalOptions="Start"
                    Grid.Row="4"
                    Grid.Column="0" />
             <Entry x:Name="etInfRate"
-                   Placeholder="Enter text"
+                   Placeholder="Enter value"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    Keyboard="Numeric"
                    TextChanged="OnInfRateChanged"
                    Grid.Row="4"
                    Grid.Column="1" />
             <Label Text="Units/hr"
-                   SemanticProperties.HeadingLevel="Level1"
-                   FontSize="{OnPlatform 32, iOS=18, Android=18}"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    HorizontalOptions="Start"
                    Grid.Row="4"
                    Grid.Column="2" />
             <Button x:Name="CalcRateBtn"
                     Text="Calculate Rate"
+                    FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                     SemanticProperties.Hint="Calculate Insulin infusion rate"
                     Clicked="OnCalcRateClicked"
                     HorizontalOptions="Start"
                     Grid.Row="5"
                     Grid.Column="0" />
             <Label Text="Set Insulin infusion rate at:"
-                   SemanticProperties.HeadingLevel="Level1"
-                   FontSize="{OnPlatform 32, iOS=18, Android=18}"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    HorizontalOptions="Start"
                    Grid.Row="6"
                    Grid.Column="0" />
             <Label x:Name="tSetRate"
                    Text="{Binding tSetRate, Mode=TwoWay}"
-                   SemanticProperties.HeadingLevel="Level1"
-                   FontSize="{OnPlatform 32, iOS=18, Android=18}"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    HorizontalOptions="Start"
                    Grid.Row="7"
                    Grid.Column="0" />
             <Label Text="Yale Insulin Infusion Protocol Logic:"
-                   SemanticProperties.HeadingLevel="Level1"
-                   FontSize="{OnPlatform 32, iOS=18, Android=18}"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    HorizontalOptions="Start"
                    Grid.Row="8"
                    Grid.Column="0" />
             <Label x:Name="tExplain"
                    Text="{Binding tExplain, Mode=TwoWay}"
-                   SemanticProperties.HeadingLevel="Level1"
-                   FontSize="{OnPlatform 32, iOS=18, Android=18}"
+                   FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                    HorizontalOptions="Start"
                    Grid.Row="9"
                    Grid.Column="0" />

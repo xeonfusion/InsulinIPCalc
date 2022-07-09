@@ -1,5 +1,5 @@
 ﻿/*  Insulin IP Calc v2.0
-    Copyright (C) 2015-2022 John George K., xeonfusion@yahoo.com
+    Copyright (C) 2015-2022 John George K., encodenetapps@gmail.com
 	
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public License
