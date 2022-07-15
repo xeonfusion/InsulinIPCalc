@@ -116,16 +116,24 @@
                    HorizontalOptions="Start"
                    Grid.Row="4"
                    Grid.Column="2" />
-            <Button x:Name="CalcRateBtn"
-                    Text="Calculate Rate"
-                    FontSize="{OnPlatform MacCatalyst=24, WinUI=16, iOS=18, Android=18}"
-                    SemanticProperties.Hint="Calculate Insulin infusion rate"
-                    Clicked="OnCalcRateClicked"
-                    HorizontalOptions="Start"
-                    Grid.Row="5"
-                    Grid.Column="0" />
+            <HorizontalStackLayout Grid.Row="5"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   Spacing="6">
+                <Button x:Name="CalcRateBtn"
+                        Text="Calculate Rate"
+                        FontSize="{OnPlatform MacCatalyst=24, WinUI=16, iOS=18, Android=18}"
+                        SemanticProperties.Hint="Calculate Insulin infusion rate"
+                        Clicked="OnCalcRateClicked" />
+                <Button x:Name="ResetBtn"
+                        Text="Reset"
+                        FontSize="{OnPlatform MacCatalyst=24, WinUI=16, iOS=18, Android=18}"
+                        SemanticProperties.Hint="Reset values"
+                        Clicked="OnResetClicked" />
+            </HorizontalStackLayout>
             <Label Text="Set Insulin infusion rate at:"
                    FontSize="{OnPlatform MacCatalyst=24, WinUI=16, iOS=18, Android=18}"
+                   TextDecorations="Underline"
                    HorizontalOptions="Start"
                    Grid.Row="6"
                    Grid.Column="0" />
@@ -134,9 +142,11 @@
                    FontSize="{OnPlatform MacCatalyst=24, WinUI=16, iOS=18, Android=18}"
                    HorizontalOptions="Start"
                    Grid.Row="7"
-                   Grid.Column="0" />
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2" />
             <Label Text="Yale Insulin Infusion Protocol Logic:"
                    FontSize="{OnPlatform MacCatalyst=24, WinUI=16, iOS=18, Android=18}"
+                   TextDecorations="Underline"
                    HorizontalOptions="Start"
                    Grid.Row="8"
                    Grid.Column="0" />
@@ -145,7 +155,8 @@
                    FontSize="{OnPlatform MacCatalyst=24, WinUI=16, iOS=18, Android=18}"
                    HorizontalOptions="Start"
                    Grid.Row="9"
-                   Grid.Column="0" />
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2" />
         </Grid>
     </ScrollView>
 </ContentPage>

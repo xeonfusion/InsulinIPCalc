@@ -289,6 +289,18 @@ public partial class MainPage : ContentPage
 
     }
 
+    private void OnResetClicked(object sender, EventArgs e)
+    {
+        etCurrentBS.Text = "";
+        etPreviousBS.Text = "";
+        etInfRate.Text = "";
+        tSetRate.Text = "Units/hr";
+        tExplain.Text = "";
+        etTimeBS.Text = "1";
+        pickerTargetBS.SelectedIndex = 1;
+
+    }
+
     public void HideKeyboard()
     {
         etCurrentBS.IsEnabled = false;

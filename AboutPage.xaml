@@ -44,7 +44,7 @@
                FontAttributes="Bold"
                VerticalOptions="Start"
                HorizontalOptions="CenterAndExpand" />
-        <Label Text="http://pro.aace.com;"
+        <Label Text="http://pro.aace.com"
                TextColor="Blue"
                TextDecorations="Underline"
                FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
