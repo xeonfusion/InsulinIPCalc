@@ -5,13 +5,13 @@
              Title="About">
     <StackLayout Orientation="Vertical"
                  Margin="20">
-        <Label Text="InsulinIPCalc v2.0 &#xA;"
+        <Label Text="InsulinIPCalc v2.1 &#xA;"
                TextColor="Blue"
                FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                FontAttributes="Bold"
                VerticalOptions="Start"
                HorizontalOptions="CenterAndExpand" />
-        <Label Text="Copyright (C) 2015-2022 &#xA;John George K."
+        <Label Text="Copyright (C) 2015-2023 &#xA;John George K."
                FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                FontAttributes="Bold"
                HorizontalOptions="Center" />

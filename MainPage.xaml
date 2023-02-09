@@ -31,6 +31,7 @@
                    Grid.Column="0" />
             <Picker x:Name="pickerTargetBS"
                     Title="Select a target"
+                    SelectedIndexChanged="OnPickerSelectedIndexChanged"
                     FontSize="{OnPlatform MacCatalyst=24, WinUI=16, iOS=18, Android=18}"
                     SelectedIndex="0"
                     Grid.Row="0"
@@ -39,10 +40,12 @@
                     <x:Array Type="{x:Type x:String}">
                         <x:String>120 - 160</x:String>
                         <x:String>140 - 180</x:String>
+                        <x:String>7.7 - 10</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
-            <Label Text="mg/dL"
+            <Label x:Name="tTargetUnit"
+                   Text="{Binding tTargetUnit, Mode=TwoWay}"
                    FontSize="{OnPlatform MacCatalyst=24, WinUI=16, iOS=18, Android=18}"
                    HorizontalOptions="Start"
                    Grid.Row="0"
@@ -59,7 +62,8 @@
                    TextChanged="OnCurrentBSChanged"
                    Grid.Row="1"
                    Grid.Column="1" />
-            <Label Text="mg/dL"
+            <Label x:Name="tCurrentUnit"
+                   Text="{Binding tCurrentUnit, Mode=TwoWay}"
                    FontSize="{OnPlatform MacCatalyst=24, WinUI=16, iOS=18, Android=18}"
                    HorizontalOptions="Start"
                    Grid.Row="1"
@@ -76,7 +80,8 @@
                    TextChanged="OnPreviousBSChanged"
                    Grid.Row="2"
                    Grid.Column="1" />
-            <Label Text="mg/dL"
+            <Label x:Name="tPreviousUnit"
+                   Text="{Binding tPreviousUnit, Mode=TwoWay}"
                    FontSize="{OnPlatform MacCatalyst=24, WinUI=16, iOS=18, Android=18}"
                    HorizontalOptions="Start"
                    Grid.Row="2"

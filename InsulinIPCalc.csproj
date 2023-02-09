@@ -15,14 +15,20 @@
         <ApplicationId>com.encodenetapps.insulinipcalc</ApplicationId>
         <ApplicationIdGuid>313a4f56-7a41-44f2-be3a-ef1e94692650</ApplicationIdGuid>
         <!-- Versions -->
-        <ApplicationDisplayVersion>2.0</ApplicationDisplayVersion>
-        <ApplicationVersion>2</ApplicationVersion>
+        <ApplicationDisplayVersion>2.1</ApplicationDisplayVersion>
+        <ApplicationVersion>1</ApplicationVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">31.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-ios|AnyCPU'">
+        <CreatePackage>false</CreatePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
         <!-- App Icon -->
@@ -33,13 +39,15 @@
                           Color="#512BD4"
                           BaseSize="128,128" />
         <!-- Images -->
-        <MauiImage Include="Resources\Images\*" />
-        <MauiImage Update="Resources\Images\dotnet_bot.svg"
-                   BaseSize="168,208" />
-        <!-- Custom Fonts -->
         <MauiFont Include="Resources\Fonts\*" />
         <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
         <MauiAsset Include="Resources\Raw\**"
                    LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+    </ItemGroup>
+    <ItemGroup>
+        <MauiImage Remove="Resources\Images\dotnet_bot.svg" />
+    </ItemGroup>
+    <ItemGroup>
+        <BundleResource Include="Resources\Images\dotnet_bot.svg" />
     </ItemGroup>
 </Project>
