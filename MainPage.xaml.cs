@@ -1,4 +1,4 @@
-﻿/*  Insulin IP Calc v2.1
+﻿/*  Insulin IP Calc v2.2
     Copyright (C) 2015-2023 John George K., encodenetapps@gmail.com
 	
     This program is free software; you can redistribute it and/or
@@ -21,11 +21,11 @@ namespace InsulinIPCalc;
 
 public partial class MainPage : ContentPage
 {
-    int nCurrentBS;
-    int nPreviousBS;
-    int nTimeBS = 1;
+    double nCurrentBS;
+    double nPreviousBS;
+    double nTimeBS = 1;
     double nInfusionRate;
-    int nBSChange;
+    double nBSChange;
     double nDelta;
     double nFinalDelta;
 
@@ -148,7 +148,7 @@ public partial class MainPage : ContentPage
     private void ReadCurrentBS()
     {
         string CurrentBS = etCurrentBS.Text;
-        if (CurrentBS != "") nCurrentBS = Convert.ToInt32(CurrentBS);
+        if (CurrentBS != "") nCurrentBS = Convert.ToDouble(CurrentBS);
         else nCurrentBS = 0;
 
     }
@@ -161,7 +161,7 @@ public partial class MainPage : ContentPage
     private void ReadPreviouBS()
     {
         string PrevBS = etPreviousBS.Text;
-        if (PrevBS != "") nPreviousBS = Convert.ToInt32(PrevBS);
+        if (PrevBS != "") nPreviousBS = Convert.ToDouble(PrevBS);
         else nPreviousBS = 0;
 
     }
@@ -174,7 +174,7 @@ public partial class MainPage : ContentPage
     private void ReadTimeBS()
     {
         string TimeBS = etTimeBS.Text;
-        if (TimeBS != "") nTimeBS = Convert.ToInt32(TimeBS);
+        if (TimeBS != "") nTimeBS = Convert.ToDouble(TimeBS);
         else nTimeBS = 1;
 
     }
@@ -390,7 +390,9 @@ public partial class MainPage : ContentPage
         string exp;
         if (pickerTargetBS.SelectedIndex == 2) //7.7 - 10 mmol/L
         {
-            exp = string.Format("Blood Sugar change is {0} mmol/L/hr, Delta is {1}, Insulin infusion rate change required is by {2} Units/hr", nBSChange / 18, nDelta, nFinalDelta);
+            double tempdval = Math.Round(nBSChange/18, 2, MidpointRounding.AwayFromZero);
+
+            exp = string.Format("Blood Sugar change is {0} mmol/L/hr, Delta is {1}, Insulin infusion rate change required is by {2} Units/hr", tempdval, nDelta, nFinalDelta);
         }
         else
         {
