@@ -1,7 +1,9 @@
 # InsulinIPCalc
 InsulinIPCalc: Insulin infusion protocol calculator and clinical decision support
 
-A simple, cross-platform, point of care, clinic decision support system (CDSS) app for Insulin infusion and hyperglycemia management in the ICU. The open-source .NET MAUI app can be compiled on iOS, Android, Mac OS X and Windows using .NET 6 SDK or later. 
+A simple, cross-platform, point of care, clinic decision support system (CDSS) app for Insulin infusion and hyperglycemia management in the ICU. The open-source .NET MAUI app can be compiled on iOS, Android, Mac OS X and Windows using .NET 6 SDK or later.
+
+Android version available via Play Store: https://play.google.com/store/apps/details?id=com.encodenetapps.insulinipcalc&hl=en&gl=US&pli=1
 
 The infusion protocol calculator is based on the updated "Yale Insulin Infusion Protocol" https://bit.ly/3IsCsia and American Association of Clinical Endocrinologists (AACE) blood sugar targets. http://pro.aace.com/.
 
