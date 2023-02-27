@@ -1,4 +1,4 @@
-﻿/*  Insulin IP Calc v2.2
+﻿/*  Insulin IP Calc v2.3
     Copyright (C) 2015-2023 John George K., encodenetapps@gmail.com
 	
     This program is free software; you can redistribute it and/or
@@ -35,7 +35,7 @@ public partial class MainPage : ContentPage
         tSetRate.Text = "Units/hr";
         tExplain.Text = "";
         etTimeBS.Text = "1";
-        pickerTargetBS.SelectedIndex = 1;
+        pickerTargetBS.SelectedIndex = 0;
         tTargetUnit.Text = "mg/dL";
         tCurrentUnit.Text = "mg/dL";
         tPreviousUnit.Text = "mg/dL";
@@ -46,7 +46,7 @@ public partial class MainPage : ContentPage
         var picker = (Picker)sender;
         int selectedIndex = picker.SelectedIndex;
 
-        if (selectedIndex == 2)
+        if (selectedIndex == 1)
         {
             tTargetUnit.Text = "mmol/L";
             tCurrentUnit.Text = "mmol/L";
@@ -65,7 +65,7 @@ public partial class MainPage : ContentPage
         HideKeyboard();
         ReadCurrentValues();
 
-        if (pickerTargetBS.SelectedIndex == 2) //7.7 - 10 mmol/L
+        if (pickerTargetBS.SelectedIndex == 1) //7.7 - 10 mmol/L
         {
             nCurrentBS = nCurrentBS * 18;
             nPreviousBS = nPreviousBS * 18;
@@ -83,25 +83,7 @@ public partial class MainPage : ContentPage
         nFinalDelta = 0;
         nDelta = 0;
 
-        if (pickerTargetBS.SelectedIndex == 0) //120 - 160 mg/dL
-        {
-            if (nCurrentBS >= 100 && nCurrentBS <= 119)
-                Range1Calculation();
-            else if (nCurrentBS >= 120 && nCurrentBS <= 159)
-                Range2Calculation();
-            else if (nCurrentBS >= 160 && nCurrentBS <= 199)
-                Range3Calculation();
-            else if (nCurrentBS >= 200)
-                Range4Calculation();
-            else if (nCurrentBS < 50)
-                Rescue1Calculation();
-            else if (nCurrentBS >= 50 && nCurrentBS <= 75)
-                Rescue2Calculation();
-            else if (nCurrentBS >= 75 && nCurrentBS <= 99)
-                Rescue3Calculation();
-        }
-
-        if (pickerTargetBS.SelectedIndex == 1) //140 - 180 mg/dL
+        if (pickerTargetBS.SelectedIndex == 0 || pickerTargetBS.SelectedIndex == 1) //140 - 180 mg/dL or //7.7 - 10 mmol/L
         {
             if (nCurrentBS >= 100 && nCurrentBS <= 139)
                 Range1Calculation();
@@ -118,25 +100,7 @@ public partial class MainPage : ContentPage
             else if (nCurrentBS >= 70 && nCurrentBS <= 99)
                 Rescue3Calculation();
         }
-
-        if (pickerTargetBS.SelectedIndex == 2) //7.7 - 10 mmol/L
-        {
-
-            if (nCurrentBS >= 100 && nCurrentBS <= 139)
-                Range1Calculation();
-            else if (nCurrentBS >= 140 && nCurrentBS <= 179)
-                Range2Calculation();
-            else if (nCurrentBS >= 180 && nCurrentBS <= 249)
-                Range3Calculation();
-            else if (nCurrentBS >= 250)
-                Range4Calculation();
-            else if (nCurrentBS < 50)
-                Rescue1Calculation();
-            else if (nCurrentBS >= 50 && nCurrentBS <= 69)
-                Rescue2Calculation();
-            else if (nCurrentBS >= 70 && nCurrentBS <= 99)
-                Rescue3Calculation();
-        }
+     
 
     }
 
@@ -205,33 +169,14 @@ public partial class MainPage : ContentPage
         else if (nBSChange <= -1 && nBSChange >= -20)
             Reduce1Delta();
         else if (nBSChange < -20)
-        {   //Reduce2Delta ();
-            string strRescue4;
-            if (pickerTargetBS.SelectedIndex == 2) //7.7 - 10 mmol/L
-                strRescue4 = "STOP Insulin infusion &" +
-                " Recheck BG in 15 minutes to be sure BG ≥5.5 mmol/L." +
-                " Then, recheck BG q 1 hr;" +
-                " when ≥7.7 mmol/L," +
-                " then restart infusion at 75% of most recent rate.\n";
-
-            else
-                strRescue4 =
-                "STOP Insulin infusion &" +
-                " Recheck BG in 15 minutes to be sure BG ≥100 mg/dL." +
-                " Then, recheck BG q 1 hr;" +
-                " when ≥140 mg/dL," +
-                " then restart infusion at 75% of most recent rate.\n";
-            tSetRate.Text = strRescue4;
-            tExplain.Text = "Large blood sugar reduction, hold and reduce Insulin infusion";
-        }
-
+            Reduce2Delta ();
     }
 
     void Range2Calculation()
     {
-        if (nBSChange > 40)
+        if (nBSChange > 20)
             Increase1Delta();
-        else if (nBSChange >= 0 && nBSChange <= 40)
+        else if (nBSChange >= 0 && nBSChange <= 20)
             SetRateAt(); //no change
         else if (nBSChange <= -1 && nBSChange >= -20)
             SetRateAt(); //no change
@@ -243,15 +188,15 @@ public partial class MainPage : ContentPage
 
     void Range3Calculation()
     {
-        if (nBSChange > 60)
+        if (nBSChange >= 40)
             Increase2Delta();
-        else if (nBSChange >= 0 && nBSChange <= 60)
+        else if (nBSChange >= 0 && nBSChange < 40)
             Increase1Delta();
         else if (nBSChange <= -1 && nBSChange >= -40)
             SetRateAt(); //no change
-        else if (nBSChange <= -41 && nBSChange >= -60)
+        else if (nBSChange <= -41 && nBSChange >= -80)
             Reduce1Delta();
-        else if (nBSChange < -60)
+        else if (nBSChange < -80)
             Reduce2Delta();
     }
 
@@ -261,13 +206,13 @@ public partial class MainPage : ContentPage
             Increase2Delta();
         else if (nBSChange == 0)
             Increase1Delta();
-        else if (nBSChange <= -1 && nBSChange >= -20)
+        else if (nBSChange <= -1 && nBSChange >= -40)
             Increase1Delta();
-        else if (nBSChange <= -21 && nBSChange >= -60)
+        else if (nBSChange <= -41 && nBSChange >= -80)
             SetRateAt(); //no change
-        else if (nBSChange <= -61 && nBSChange >= -80)
+        else if (nBSChange <= -81 && nBSChange >= -120)
             Reduce1Delta();
-        else if (nBSChange < -80)
+        else if (nBSChange < -120)
             Reduce2Delta();
 
     }
@@ -275,16 +220,18 @@ public partial class MainPage : ContentPage
     void Rescue1Calculation()
     {
         string strRescue1;
-        if (pickerTargetBS.SelectedIndex == 2) //7.7 - 10 mmol/L
+        if (pickerTargetBS.SelectedIndex == 1) //7.7 - 10 mmol/L
             strRescue1 = "STOP Insulin infusion & administer 1 amp (25 g) D50 IV;" +
             " recheck BG q 15 minutes until ≥5.5 mmol/L." +
-            " Then,recheck BG q 1 hr; when ≥7.7 mmol/L, wait 30 min," +
+            " Administer further 25g D50 IV if BG <3.9 mmol/L." +
+            " Then, recheck BG after 1 hr; if ≥5.5 mmol/L," +
             " restart insulin infusion at 50% of most recent rate.\n";
 
         else strRescue1 =
             "STOP Insulin infusion & administer 1 amp (25 g) D50 IV;" +
             " recheck BG q 15 minutes until ≥100 mg/dL." +
-            " Then,recheck BG q 1 hr; when ≥140 mg/dL, wait 30 min," +
+            " Administer further 25g D50 IV if BG <70 mg/dL." +
+            " Then, recheck BG after 1 hr; if ≥100 mg/dL," +
             " restart insulin infusion at 50% of most recent rate.\n";
 
         tSetRate.Text = strRescue1;
@@ -294,18 +241,20 @@ public partial class MainPage : ContentPage
     void Rescue2Calculation()
     {
         string strRescue2;
-        if (pickerTargetBS.SelectedIndex == 2) //7.7 - 10 mmol/L
+        if (pickerTargetBS.SelectedIndex == 1) //7.7 - 10 mmol/L
             strRescue2 =
             "STOP Insulin infusion & administer 1/2 amp (12.5 g) D50 IV;" +
             " recheck BG q 15 minutes until ≥5.5 mmol/L." +
-            " Then,recheck BG q 1 hr; when ≥7.7 mmol/L, wait 30 min," +
-            " restart insulin infusion at 50% of most recent rate.\n";
+            " Administer further 12.5g D50 IV if BG <3.9 mmol/L." +
+            " Then, recheck BG after 1 hr; if ≥5.5 mmol/L," +
+            " restart insulin infusion at 75% of most recent rate.\n";
         else
             strRescue2 =
-                "STOP Insulin infusion & administer 1/2 amp (12.5 g) D50 IV;" +
+            "STOP Insulin infusion & administer 1/2 amp (12.5 g) D50 IV;" +
             " recheck BG q 15 minutes until ≥100 mg/dL." +
-            " Then,recheck BG q 1 hr; when ≥140 mg/dL, wait 30 min," +
-            " restart insulin infusion at 50% of most recent rate.\n";
+            " Administer further 12.5g D50 IV if BG <70 mg/dL." +
+            " Then, recheck BG after 1 hr; if ≥100 mg/dL," +
+            " restart insulin infusion at 75% of most recent rate.\n";
 
         tSetRate.Text = strRescue2;
         tExplain.Text = "Warning! Hypoglycemia";
@@ -314,20 +263,20 @@ public partial class MainPage : ContentPage
     void Rescue3Calculation()
     {
         string strRescue3;
-        if (pickerTargetBS.SelectedIndex == 2) //7.7 - 10 mmol/L
+        if (pickerTargetBS.SelectedIndex == 1) //7.7 - 10 mmol/L
             strRescue3 =
             "STOP Insulin infusion &" +
-            " Recheck BG q 15 minutes until BG reaches or remains ≥5.5 mmol/L." +
-            " Then, recheck BG q 1 hr;" +
-            " when ≥7.7 mmol/L, wait 30 min," +
-            " then restart infusion at 75% of most recent rate.\n";
+            " Recheck BG q 30 minutes until BG ≥5.5 mmol/L." +
+            " Administer further 12.5g D50 IV if BG <3.9 mmol/L." +
+            " Restart infusion at 75% of most recent rate." +
+            " Resume BG check q 1 hr.\n";
         else
             strRescue3 =
             "STOP Insulin infusion &" +
-            " Recheck BG q 15 minutes until BG reaches or remains ≥100 mg/dL." +
-            " Then, recheck BG q 1 hr;" +
-            " when ≥140 mg/dL, wait 30 min," +
-            " then restart infusion at 75% of most recent rate.\n";
+            " Recheck BG q 30 minutes until BG ≥100 mg/dL." +
+            " Administer further 12.5g D50 IV if BG <70 mg/dL." +
+            " Restart infusion at 75% of most recent rate." +
+            " Resume BG check q 1 hr.\n";
 
         tSetRate.Text = strRescue3;
         tExplain.Text = "Warning! Hypoglycemia";
@@ -344,9 +293,9 @@ public partial class MainPage : ContentPage
     {
         nFinalDelta = -2 * CalculateDelta();
         double nFinalRate = (nFinalDelta + nInfusionRate);
-        string sRate = string.Format("HOLD for 30min, then set at {0} Units/hr", nFinalRate);
+        string sRate = string.Format("HOLD infusion for 30min, then set at {0} Units/hr", nFinalRate);
         tSetRate.Text = sRate;
-        tExplain.Text = "Large blood sugar reduction, hold and reduce Insulin infusion by 2Delta";
+        tExplain.Text = "Large blood glucose reduction, hold and reduce Insulin infusion by 2Delta";
     }
 
     void Increase1Delta()
@@ -374,8 +323,10 @@ public partial class MainPage : ContentPage
             nDelta = 2;
         else if (nInfusionRate >= 15 && nInfusionRate <= 19.5)
             nDelta = 3;
-        else if (nInfusionRate >= 20)
+        else if (nInfusionRate >= 20 && nInfusionRate <= 24.5)
             nDelta = 4;
+        else if (nInfusionRate >= 25)
+            nDelta = 5;
 
         return nDelta;
 
@@ -388,37 +339,78 @@ public partial class MainPage : ContentPage
         tSetRate.Text = sRate;
 
         string exp;
-        if (pickerTargetBS.SelectedIndex == 2) //7.7 - 10 mmol/L
+        if (pickerTargetBS.SelectedIndex == 1) //7.7 - 10 mmol/L
         {
             double tempdval = Math.Round(nBSChange/18, 2, MidpointRounding.AwayFromZero);
 
-            exp = string.Format("Blood Sugar change is {0} mmol/L/hr, Delta is {1}, Insulin infusion rate change required is by {2} Units/hr", tempdval, nDelta, nFinalDelta);
+            exp = string.Format("Blood glucose change is {0} mmol/L/hr, Delta is {1}, Insulin infusion rate change required is by {2} Units/hr", tempdval, nDelta, nFinalDelta);
         }
         else
         {
-            exp = string.Format("Blood Sugar change is {0} mg/dL/hr, Delta is {1}, Insulin infusion rate change required is by {2} Units/hr", nBSChange, nDelta, nFinalDelta);
+            exp = string.Format("Blood glucose change is {0} mg/dL/hr, Delta is {1}, Insulin infusion rate change required is by {2} Units/hr", nBSChange, nDelta, nFinalDelta);
         }
 
-        tExplain.Text = exp;
+        if (nFinalDelta == 10) tExplain.Text = exp + ". Consult MD";
+        else tExplain.Text = exp;
     }
 
     void StartBolusAndInfusion()
     {
-        double dval = Convert.ToDouble(nCurrentBS) / 100;
-        double tempdval = dval * 2;
-        tempdval = Math.Round(tempdval, 0, MidpointRounding.AwayFromZero);
-        double nFinalRate = tempdval / 2;
-
-        string sRate = string.Format("Give {0} Units bolus & start infusion at {0} Units/hr", nFinalRate);
-        tSetRate.Text = sRate;
-
+        string sRate;
         string exp;
-        if (pickerTargetBS.SelectedIndex == 2) //7.7 - 10 mmol/L
-            exp = "Starting blood sugar is divided by 5.5 and rounded to nearest 0.5 unit";
-        else
-            exp = "Starting blood sugar is divided by 100 and rounded to nearest 0.5 unit";
+        double tempdval;
+        double nFinalRate;
 
-        tExplain.Text = exp;
+        if (nCurrentBS >= 100 && nCurrentBS < 180)
+        {
+
+            sRate = "Start infusion at 0.5 Units/hr. Do not bolus";
+            tSetRate.Text = sRate;
+
+            if (pickerTargetBS.SelectedIndex == 1) //7.7 - 10 mmol/L
+                exp = "Starting blood glucose is less than 10 mmol/L";
+            else
+                exp = "Starting blood glucose is less than 180 mg/dL";
+
+            tExplain.Text = exp;
+
+        }
+
+        if (nCurrentBS >= 180 && nCurrentBS < 300)
+        {
+            double dval = Convert.ToDouble(nCurrentBS) / 100;
+            tempdval = dval * 2;
+            tempdval = Math.Round(tempdval, 0, MidpointRounding.AwayFromZero);
+            nFinalRate = tempdval / 2;
+
+            sRate = string.Format("Start infusion at {0} Units/hr. Do not bolus", nFinalRate);
+            tSetRate.Text = sRate;
+
+            if (pickerTargetBS.SelectedIndex == 1) //7.7 - 10 mmol/L
+                exp = "Starting blood glucose is divided by 5.5 and rounded to nearest 0.5 unit";
+            else
+                exp = "Starting blood glucose is divided by 100 and rounded to nearest 0.5 unit";
+
+            tExplain.Text = exp;
+
+        }
+
+        if (nCurrentBS >= 300)
+        {
+            tempdval = nCurrentBS / 100;
+            nFinalRate = Math.Round(tempdval, 0, MidpointRounding.AwayFromZero); 
+
+            sRate = string.Format("Give {0} Units bolus & start infusion at {0} Units/hr", nFinalRate);
+            tSetRate.Text = sRate;
+
+            if (pickerTargetBS.SelectedIndex == 1) //7.7 - 10 mmol/L
+                exp = "Starting blood glucose is divided by 5.5 and rounded to nearest 1 unit";
+            else
+                exp = "Starting blood glucose is divided by 100 and rounded to nearest 1 unit";
+
+            tExplain.Text = exp;
+
+        }
 
     }
 

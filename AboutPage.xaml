@@ -5,7 +5,7 @@
              Title="About">
     <StackLayout Orientation="Vertical"
                  Margin="20">
-        <Label Text="InsulinIPCalc v2.2 &#xA;"
+        <Label Text="InsulinIPCalc v2.3 &#xA;"
                TextColor="Blue"
                FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                FontAttributes="Bold"
@@ -39,11 +39,23 @@
                                       CommandParameter="https://github.com/xeonfusion/InsulinIPCalc" />
             </Label.GestureRecognizers>
         </Label>
-        <Label Text="Yale Insulin protocol:"
+        <Label Text="Modified Yale Insulin protocol:"
                FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                FontAttributes="Bold"
                VerticalOptions="Start"
                HorizontalOptions="CenterAndExpand" />
+        <Label Text="https://doi.org/10.1177/10600280221074683"
+               TextColor="Blue"
+               TextDecorations="Underline"
+               FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
+               FontAttributes="Bold"
+               VerticalOptions="Start"
+               HorizontalOptions="CenterAndExpand">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TapCommand}"
+                                      CommandParameter="https://doi.org/10.1177/10600280221074683" />
+            </Label.GestureRecognizers>
+        </Label>
         <Label Text="http://pro.aace.com"
                TextColor="Blue"
                TextDecorations="Underline"

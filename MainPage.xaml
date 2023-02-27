@@ -38,7 +38,6 @@
                     Grid.Column="1">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
-                        <x:String>120 - 160</x:String>
                         <x:String>140 - 180</x:String>
                         <x:String>7.7 - 10</x:String>
                     </x:Array>
@@ -149,7 +148,7 @@
                    Grid.Row="7"
                    Grid.Column="0"
                    Grid.ColumnSpan="2" />
-            <Label Text="Yale Insulin Infusion Protocol Logic:"
+            <Label Text="Modified Yale Insulin Infusion Protocol Logic:"
                    FontSize="{OnPlatform MacCatalyst=24, WinUI=16, iOS=18, Android=18}"
                    TextDecorations="Underline"
                    HorizontalOptions="Start"

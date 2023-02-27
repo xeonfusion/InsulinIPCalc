@@ -15,8 +15,8 @@
         <ApplicationId>com.encodenetapps.insulinipcalc</ApplicationId>
         <ApplicationIdGuid>313a4f56-7a41-44f2-be3a-ef1e94692650</ApplicationIdGuid>
         <!-- Versions -->
-        <ApplicationDisplayVersion>2.2</ApplicationDisplayVersion>
-        <ApplicationVersion>4</ApplicationVersion>
+        <ApplicationDisplayVersion>2.3</ApplicationDisplayVersion>
+        <ApplicationVersion>5</ApplicationVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">31.0</SupportedOSPlatformVersion>
