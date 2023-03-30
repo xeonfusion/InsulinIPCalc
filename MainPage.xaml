@@ -39,7 +39,7 @@
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>140 - 180</x:String>
-                        <x:String>7.7 - 10</x:String>
+                        <x:String>7.8 - 10</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>

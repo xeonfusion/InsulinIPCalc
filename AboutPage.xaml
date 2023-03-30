@@ -5,7 +5,7 @@
              Title="About">
     <StackLayout Orientation="Vertical"
                  Margin="20">
-        <Label Text="InsulinIPCalc v2.3 &#xA;"
+        <Label Text="InsulinIPCalc v2.4 &#xA;"
                TextColor="Blue"
                FontSize="{OnIdiom Desktop=24, Phone=18, Tablet=24}"
                FontAttributes="Bold"
