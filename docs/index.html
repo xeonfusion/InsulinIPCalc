@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Insulin infusion protocol calculator">
+  <meta name="theme-color" content="#319997">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="InsulinIP">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>InsulinIPCalc</title>
+  <link rel="icon" href="icons/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header>
+      <p class="eyebrow">Clinical decision support</p>
+      <h1>InsulinIPCalc</h1>
+      <p class="intro">Modified Yale insulin infusion protocol calculator</p>
+    </header>
+
+    <section class="notice" aria-label="Medical disclaimer">
+      <strong>For medical professionals only.</strong>
+      Use under the supervision of a licensed physician. This tool does not replace clinical judgment.
+    </section>
+
+    <form id="calculator-form">
+      <div class="field-grid">
+        <label for="target-unit">Target blood glucose</label>
+        <select id="target-unit" name="target-unit">
+          <option value="mgdl">140 - 180 mg/dL</option>
+          <option value="mmol">7.8 - 10 mmol/L</option>
+        </select>
+
+        <label for="current-glucose">Current blood glucose</label>
+        <div class="input-with-unit">
+          <input id="current-glucose" name="current-glucose" type="number" min="0" step="any" inputmode="decimal" placeholder="Enter value" required>
+          <span id="current-unit">mg/dL</span>
+        </div>
+
+        <label for="previous-glucose">Previous blood glucose</label>
+        <div class="input-with-unit">
+          <input id="previous-glucose" name="previous-glucose" type="number" min="0" step="any" inputmode="decimal" placeholder="Enter value" required>
+          <span id="previous-unit">mg/dL</span>
+        </div>
+
+        <label for="reading-hours">Time between readings</label>
+        <div class="input-with-unit">
+          <input id="reading-hours" name="reading-hours" type="number" min="0.01" step="any" value="1" inputmode="decimal" required>
+          <span>hr</span>
+        </div>
+
+        <label for="infusion-rate">Current infusion rate</label>
+        <div class="input-with-unit">
+          <input id="infusion-rate" name="infusion-rate" type="number" min="0" step="any" inputmode="decimal" placeholder="Enter value" required>
+          <span>Units/hr</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="calculate-button" type="submit" disabled>Loading calculator…</button>
+        <button id="reset-button" class="secondary" type="reset">Reset</button>
+      </div>
+    </form>
+
+    <section class="result" aria-live="polite">
+      <h2>Set insulin infusion rate at:</h2>
+      <p id="rate-result" class="rate-result">Units/hr</p>
+      <h2>Modified Yale insulin infusion protocol logic:</h2>
+      <p id="explanation">The WebAssembly calculator is loading.</p>
+    </section>
+  </main>
+  <footer>InsulinIPCalc · Algorithm runs locally in your browser using Python and WebAssembly.</footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
