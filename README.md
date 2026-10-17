@@ -11,3 +11,5 @@ The infusion protocol calculator is based on the updated "Yale Insulin Infusion 
 Publication: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4743315/
 
 To be used by medical professionals under supervision of licensed physicians only, no warranty is applicable.
+
+<img width="1284" height="2652" alt="image" src="https://github.com/user-attachments/assets/57f7d73a-adda-4f97-a9fb-9b7f3201d7eb" />
